@@ -17,8 +17,8 @@ public class EnderecoParteServiceImpl implements EnderecoParteService<Endereco_P
 	EnderecoParteRepository enderecoParteRepository;
 
 	@Override
-	public void save(Endereco_Parte obj) {
-		enderecoParteRepository.save(obj);
+	public Endereco_Parte save(Endereco_Parte obj) {
+		return enderecoParteRepository.save(obj);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class EnderecoParteServiceImpl implements EnderecoParteService<Endereco_P
 	}
 
 	@Override
-	public Optional<Endereco_Parte> find(Long id) {
+	public Optional<Endereco_Parte> findById(Long id) {
 		return enderecoParteRepository.findById(id);
 	}
 

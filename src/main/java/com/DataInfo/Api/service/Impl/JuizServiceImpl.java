@@ -17,8 +17,8 @@ public class JuizServiceImpl implements JuizService<Juiz, Long>{
 	JuizRepository juizRepository;
 
 	@Override
-	public void save(Juiz obj) {
-		juizRepository.save(obj);
+	public Juiz save(Juiz obj) {
+		return juizRepository.save(obj);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class JuizServiceImpl implements JuizService<Juiz, Long>{
 	}
 
 	@Override
-	public Optional<Juiz> find(Long id) {
+	public Optional<Juiz> findById(Long id) {
 		return juizRepository.findById(id);
 	}
 

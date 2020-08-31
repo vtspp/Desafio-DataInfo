@@ -17,8 +17,8 @@ public class ParteServiceImpl implements ParteService<Parte, Long>{
 	ParteRepository parteRepository;
 
 	@Override
-	public void save(Parte obj) {
-		parteRepository.save(obj);
+	public Parte save(Parte obj) {
+		return parteRepository.save(obj);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class ParteServiceImpl implements ParteService<Parte, Long>{
 	}
 
 	@Override
-	public Optional<Parte> find(Long id) {
+	public Optional<Parte> findById(Long id) {
 		return parteRepository.findById(id);
 	}
 

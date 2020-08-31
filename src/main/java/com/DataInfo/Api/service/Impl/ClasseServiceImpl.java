@@ -17,8 +17,8 @@ public class ClasseServiceImpl implements ClasseService<Classe, Long>{
 	ClasseRepository classeRepository;
 
 	@Override
-	public void save(Classe obj) {
-		classeRepository.save(obj);
+	public Classe save(Classe obj) {
+		return classeRepository.save(obj);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class ClasseServiceImpl implements ClasseService<Classe, Long>{
 	}
 
 	@Override
-	public Optional<Classe> find(Long id) {
+	public Optional<Classe> findById(Long id) {
 		return classeRepository.findById(id);
 	}
 

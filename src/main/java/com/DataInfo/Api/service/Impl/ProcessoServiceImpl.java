@@ -17,8 +17,8 @@ public class ProcessoServiceImpl implements ProcessoService<Processo, Long>{
 	ProcessoRepository processoRepository;
 
 	@Override
-	public void save(Processo obj) {
-		processoRepository.save(obj);
+	public Processo save(Processo obj) {
+		return processoRepository.save(obj);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class ProcessoServiceImpl implements ProcessoService<Processo, Long>{
 	}
 
 	@Override
-	public Optional<Processo> find(Long id) {
+	public Optional<Processo> findById(Long id) {
 		return processoRepository.findById(id);
 	}
 

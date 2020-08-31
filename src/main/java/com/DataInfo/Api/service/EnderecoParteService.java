@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface EnderecoParteService<T, K> extends Services<T, K>{
 
-    public void save(T obj);
+    public T save(T obj);
     public List<T> findAll();
-    public Optional<T> find(Long id);
+    public Optional<T> findById(Long id);
 }
