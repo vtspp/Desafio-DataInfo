@@ -1,8 +1,13 @@
 package com.DataInfo.Api.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Classe implements Serializable {
@@ -15,13 +20,13 @@ public class Classe implements Serializable {
     private String sigla;
     private String tipo;
 
-    @OneToMany
-    @JoinColumn(name = "id_classe")
-    private Set<Processo> processos = new HashSet<>();
+    @OneToMany(mappedBy = "classe")
+    private List<Processo> processos = new ArrayList<>();
 
     public Classe() {}
 
-    public Classe(Long id, String id_Cnj, String ds_Classe, String sigla, String tipo) {
+    public Classe(Long id, String id_Cnj, String ds_Classe, 
+    		      String sigla, String tipo) {
         this.id = id;
         this.id_Cnj = id_Cnj;
         this.ds_Classe = ds_Classe;
@@ -69,7 +74,7 @@ public class Classe implements Serializable {
         this.tipo = tipo;
     }
 
-    public Set<Processo> getProcessos() {
+    public List<Processo> getProcessos() {
         return processos;
     }
 

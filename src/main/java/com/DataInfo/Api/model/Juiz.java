@@ -1,17 +1,18 @@
 package com.DataInfo.Api.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Juiz implements Serializable {
@@ -24,9 +25,11 @@ public class Juiz implements Serializable {
     private String cpf;
     private Date data_Nascimento;
 
-    @OneToMany
-    @JoinColumn(name = "id_juiz")
-    private Set<Processo_Juiz> processo_juiz = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "processo_juiz", 
+    joinColumns = @JoinColumn(name = "id_processo"),
+    inverseJoinColumns = @JoinColumn(name = "id_juiz"))
+    private List<Processo> processos = new ArrayList<>();
 
     public Juiz(){}
 
@@ -69,8 +72,8 @@ public class Juiz implements Serializable {
         this.data_Nascimento = data_Nascimento;
     }
 
-    public Set<Processo_Juiz> getProcesso_juiz() {
-        return processo_juiz;
+    public List<Processo> getProcesso() {
+        return processos;
     }
 
     @Override
@@ -93,7 +96,7 @@ public class Juiz implements Serializable {
                 ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", data_Nascimento=" + data_Nascimento +
-                ", processo_juiz=" + processo_juiz +
+                ", processos=" + processos +
                 '}';
     }
 }

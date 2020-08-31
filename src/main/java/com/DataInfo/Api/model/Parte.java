@@ -1,16 +1,16 @@
 package com.DataInfo.Api.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -25,13 +25,11 @@ public class Parte implements Serializable {
     private String cpf;
     private String tipo_Parte;
 
-    @OneToMany
-    @JoinColumn(name = "id_Parte")
-    private Set<Processo_Parte> processo_Parte = new HashSet<>();
+    @ManyToMany(mappedBy = "partes")
+    private List<Processo> processos = new ArrayList<>();
 
-    @OneToMany
-    @JoinColumn(name = "id_parte")
-    private Set<Endereco_Parte> endereco_Parte = new HashSet<>();
+    @OneToMany(mappedBy = "parte")
+    private List<Endereco_Parte> endereco_Parte = new ArrayList<>();
 
     public Parte() {}
 
@@ -83,11 +81,11 @@ public class Parte implements Serializable {
         this.tipo_Parte = tipo_Parte;
     }
 
-    public Set<Processo_Parte> getProcessoPartes() {
-        return processo_Parte;
+    public List<Processo> getProcessoPartes() {
+        return processos;
     }
 
-    public Set<Endereco_Parte> getEndereco_partes() {
+    public List<Endereco_Parte> getEndereco_partes() {
         return endereco_Parte;
     }
 
@@ -112,7 +110,7 @@ public class Parte implements Serializable {
                 ", data_Nascimento=" + data_Nascimento +
                 ", cpf='" + cpf + '\'' +
                 ", tipo_Parte='" + tipo_Parte + '\'' +
-                ", processo_Parte=" + processo_Parte +
+                ", processo=" + processos +
                 ", endereco_Parte=" + endereco_Parte +
                 '}';
     }

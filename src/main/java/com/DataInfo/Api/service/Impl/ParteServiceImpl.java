@@ -7,19 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.DataInfo.Api.model.Parte;
-import com.DataInfo.Api.repository.Impl.ParteRepositoryImpl;
+import com.DataInfo.Api.repository.ParteRepository;
 import com.DataInfo.Api.service.ParteService;
 
 @Service
 public class ParteServiceImpl implements ParteService<Parte, Long>{
 	
 	@Autowired
-	private ParteRepositoryImpl parteRepository;
+	ParteRepository parteRepository;
 
 	@Override
 	public void save(Parte obj) {
 		parteRepository.save(obj);
-		
 	}
 
 	@Override

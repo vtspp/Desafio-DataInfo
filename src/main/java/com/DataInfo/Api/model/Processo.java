@@ -1,18 +1,19 @@
 package com.DataInfo.Api.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Processo implements Serializable {
@@ -29,9 +30,11 @@ public class Processo implements Serializable {
     @JoinColumn(name = "id_classe")
     private Classe classe;
 
-    @OneToMany
-    @JoinColumn(name = "id_processo")
-    private Set<Processo_Parte> processoPartes = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "processo_parte", 
+               joinColumns = @JoinColumn(name = "id_processo"),
+               inverseJoinColumns = @JoinColumn(name = "id_parte"))
+    private List<Parte> partes = new ArrayList<>();
 
     public Processo() {}
 
@@ -84,10 +87,10 @@ public class Processo implements Serializable {
         this.classe = classe;
     }
 
-   /* public Set<Processo_Parte> getProcessoPartes() {
-        return processoPartes;
+    public List<Parte> getPartes() {
+        return partes;
     }
-*/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -101,15 +104,15 @@ public class Processo implements Serializable {
         return Objects.hash(getId());
     }
 
-    @Override
-    public String toString() {
-        return "Processo{" +
-                "id=" + id +
-                ", nr_Processo='" + nr_Processo + '\'' +
-                ", data_Criacao=" + data_Criacao +
-                ", data_distribuicao=" + data_distribuicao +
-                ", classe=" + classe +
-                ", processoPartes=" /*+ processoPartes*/ +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Processo [id=" + id + ", "
+				+ "nr_Processo=" + nr_Processo + ", "
+				+ "data_Criacao=" + data_Criacao
+				+ ", data_distribuicao=" + data_distribuicao + ", "
+				+ "classe=" + classe + ", partes="
+				+ partes + "]";
+	}
+
+    
 }

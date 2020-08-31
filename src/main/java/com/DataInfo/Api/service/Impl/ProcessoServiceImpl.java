@@ -7,19 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.DataInfo.Api.model.Processo;
-import com.DataInfo.Api.repository.Impl.ProcessoRepositoryImpl;
+import com.DataInfo.Api.repository.ProcessoRepository;
 import com.DataInfo.Api.service.ProcessoService;
 
 @Service
 public class ProcessoServiceImpl implements ProcessoService<Processo, Long>{
 	
 	@Autowired
-	private ProcessoRepositoryImpl processoRepository;
+	ProcessoRepository processoRepository;
 
 	@Override
 	public void save(Processo obj) {
 		processoRepository.save(obj);
-		
 	}
 
 	@Override

@@ -7,19 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.DataInfo.Api.model.Classe;
-import com.DataInfo.Api.repository.Impl.ClasseRepositoryImpl;
+import com.DataInfo.Api.repository.ClasseRepository;
 import com.DataInfo.Api.service.ClasseService;
 
 @Service
 public class ClasseServiceImpl implements ClasseService<Classe, Long>{
 	
 	@Autowired
-	private ClasseRepositoryImpl classeRepository;
+	ClasseRepository classeRepository;
 
 	@Override
 	public void save(Classe obj) {
 		classeRepository.save(obj);
-		
 	}
 
 	@Override

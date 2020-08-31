@@ -7,19 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.DataInfo.Api.model.Endereco_Parte;
-import com.DataInfo.Api.repository.Impl.EnderecoParteRepositoryImpl;
+import com.DataInfo.Api.repository.EnderecoParteRepository;
 import com.DataInfo.Api.service.EnderecoParteService;
 
 @Service
 public class EnderecoParteServiceImpl implements EnderecoParteService<Endereco_Parte, Long>{
 	
 	@Autowired
-	private EnderecoParteRepositoryImpl enderecoParteRepository;
+	EnderecoParteRepository enderecoParteRepository;
 
 	@Override
 	public void save(Endereco_Parte obj) {
 		enderecoParteRepository.save(obj);
-		
 	}
 
 	@Override

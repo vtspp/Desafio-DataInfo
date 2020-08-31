@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.DataInfo.Api.model.Juiz;
-import com.DataInfo.Api.service.Impl.juizServiceImpl;
+import com.DataInfo.Api.service.Impl.JuizServiceImpl;
 
 @RestController
 public class JuizController {
 
 	@Autowired
-	private juizServiceImpl juizService;
+	private JuizServiceImpl juizService;
 
 
     @PostMapping("/api/juiz/save")

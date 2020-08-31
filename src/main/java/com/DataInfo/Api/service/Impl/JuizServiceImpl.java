@@ -7,19 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.DataInfo.Api.model.Juiz;
-import com.DataInfo.Api.repository.Impl.JuizRepositoryImpl;
+import com.DataInfo.Api.repository.JuizRepository;
 import com.DataInfo.Api.service.JuizService;
 
 @Service
-public class juizServiceImpl implements JuizService<Juiz, Long>{
+public class JuizServiceImpl implements JuizService<Juiz, Long>{
 	
 	@Autowired
-	private JuizRepositoryImpl juizRepository;
+	JuizRepository juizRepository;
 
 	@Override
 	public void save(Juiz obj) {
 		juizRepository.save(obj);
-		
 	}
 
 	@Override
