@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.DataInfo.Api.error.ErrorAlreadyRegistered;
 import com.DataInfo.Api.error.ErrorNotFound;
 import com.DataInfo.Api.model.Classe;
 import com.DataInfo.Api.repository.ClasseRepository;
@@ -19,6 +20,7 @@ public class ClasseServiceImpl implements ClasseService<Classe, Long>{
 
 	@Override
 	public Classe save(Classe obj) {
+		verifyUserAlreadyRegisteredByClasse(obj);
 		return classeRepository.save(obj);
 	}
 
@@ -36,6 +38,13 @@ public class ClasseServiceImpl implements ClasseService<Classe, Long>{
 	public void verifyExistsById(Long id) {
 		if (!classeRepository.existsById(id)) {
 			throw new ErrorNotFound("Não foi encontrado o id: " + id);
+		}
+	}
+	
+	public void verifyUserAlreadyRegisteredByClasse(Classe obj) {
+		if (!classeRepository.existsByClasse(obj)) {
+			throw new ErrorAlreadyRegistered("Classe " + obj.getClass().getName() 
+					                                   + " já cadastrado na base de dados");
 		}
 	}
 

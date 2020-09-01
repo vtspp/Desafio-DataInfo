@@ -4,19 +4,30 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.DataInfo.Api.model.Classe;
+import com.DataInfo.Api.model.EnderecoParte;
+import com.DataInfo.Api.model.Parte;
 import com.DataInfo.Api.service.Impl.ClasseServiceImpl;
+import com.DataInfo.Api.service.Impl.EnderecoParteServiceImpl;
+import com.DataInfo.Api.service.Impl.ParteServiceImpl;
 
 @Configuration
 public class DataBaseSeeding implements CommandLineRunner {
 	
 	@Autowired
 	private ClasseServiceImpl classeService;
+	
+	@Autowired
+	private ParteServiceImpl parteServiceImpl; 
+	
+	@Autowired
+	private EnderecoParteServiceImpl enderecoParteImpl;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -45,6 +56,16 @@ try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
 			
 			System.out.println("Application initialized with:" + path);
 			
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			
+			Parte parte = new Parte(null, "teste", sdf.parse("14/06/1989"), "12312312303", "Desenvolvedor Java");
+			parteServiceImpl.save(parte);
+			
+			EnderecoParte endereco = new EnderecoParte(null, "São Gonçalo", "Rio de Janeiro", 
+					                                         "RJ", "24800000", "Rua Conde de Bonfim", 120, parte);
+			
+		    enderecoParteImpl.save(endereco);
+		    
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

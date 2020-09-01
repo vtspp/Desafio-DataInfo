@@ -3,7 +3,6 @@ package com.DataInfo.Api.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -80,20 +79,64 @@ public class Classe implements Serializable {
         return processos;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Classe)) return false;
-        Classe classe = (Classe) o;
-        return getId().equals(classe.getId());
-    }
+   
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ds_Classe == null) ? 0 : ds_Classe.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((id_Cnj == null) ? 0 : id_Cnj.hashCode());
+		result = prime * result + ((processos == null) ? 0 : processos.hashCode());
+		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		return result;
+	}
 
-    @Override
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Classe other = (Classe) obj;
+		if (ds_Classe == null) {
+			if (other.ds_Classe != null)
+				return false;
+		} else if (!ds_Classe.equals(other.ds_Classe))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (id_Cnj == null) {
+			if (other.id_Cnj != null)
+				return false;
+		} else if (!id_Cnj.equals(other.id_Cnj))
+			return false;
+		if (processos == null) {
+			if (other.processos != null)
+				return false;
+		} else if (!processos.equals(other.processos))
+			return false;
+		if (sigla == null) {
+			if (other.sigla != null)
+				return false;
+		} else if (!sigla.equals(other.sigla))
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
+			return false;
+		return true;
+	}
+
+	@Override
     public String toString() {
         return "Classe{" +
                 "id=" + id +

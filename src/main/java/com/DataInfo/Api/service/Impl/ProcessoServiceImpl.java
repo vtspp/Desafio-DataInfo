@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.DataInfo.Api.error.ErrorNotFound;
 import com.DataInfo.Api.model.Processo;
 import com.DataInfo.Api.repository.ProcessoRepository;
 import com.DataInfo.Api.service.ProcessoService;
@@ -28,7 +29,15 @@ public class ProcessoServiceImpl implements ProcessoService<Processo, Long>{
 
 	@Override
 	public Optional<Processo> findById(Long id) {
+		verifyExistsById(id);
 		return processoRepository.findById(id);
+	}
+	
+	public void verifyExistsById(Long id) {
+		if (!processoRepository.existsById(id)) {
+			throw new ErrorNotFound("Não foi encontrado o id: " + id);
+		}
+
 	}
 
 }

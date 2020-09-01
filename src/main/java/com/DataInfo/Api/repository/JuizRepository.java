@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.DataInfo.Api.model.Juiz;
 
 public interface JuizRepository extends Repositories<Juiz, Long>, JpaRepository<Juiz, Long>{
+
+	boolean existsByCpf(String cpf);
 }
