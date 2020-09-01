@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.DataInfo.Api.error.ErrorNotFound;
 import com.DataInfo.Api.model.Classe;
 import com.DataInfo.Api.repository.ClasseRepository;
 import com.DataInfo.Api.service.ClasseService;
@@ -28,7 +29,14 @@ public class ClasseServiceImpl implements ClasseService<Classe, Long>{
 
 	@Override
 	public Optional<Classe> findById(Long id) {
+		verifyExistsById(id);
 		return classeRepository.findById(id);
+	}
+	
+	public void verifyExistsById(Long id) {
+		if (!classeRepository.existsById(id)) {
+			throw new ErrorNotFound("Não foi encontrado o id: " + id);
+		}
 	}
 
 }

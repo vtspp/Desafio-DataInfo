@@ -1,20 +1,16 @@
 package com.DataInfo.Api.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_juiz")
 public class Juiz implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -24,12 +20,12 @@ public class Juiz implements Serializable {
     private String nome;
     private String cpf;
     private Date data_Nascimento;
-
+/*
     @ManyToMany
     @JoinTable(name = "processo_juiz", 
     joinColumns = @JoinColumn(name = "id_processo"),
     inverseJoinColumns = @JoinColumn(name = "id_juiz"))
-    private List<Processo> processos = new ArrayList<>();
+    private List<Processo> processos = new ArrayList<>();*/
 
     public Juiz(){}
 
@@ -72,31 +68,49 @@ public class Juiz implements Serializable {
         this.data_Nascimento = data_Nascimento;
     }
 
-    public List<Processo> getProcesso() {
+    /*public List<Processo> getProcesso() {
         return processos;
-    }
+    }*/
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Juiz)) return false;
-        Juiz juiz = (Juiz) o;
-        return getId().equals(juiz.getId());
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Juiz other = (Juiz) obj;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Juiz{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", data_Nascimento=" + data_Nascimento +
-                ", processos=" + processos +
+                ", processos=" /*+ processos*/ +
                 '}';
     }
 }

@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "tb_parte")
 public class Parte implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -21,24 +23,22 @@ public class Parte implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    private Date data_Nascimento;
+    private Date dataNascimento;
     private String cpf;
-    private String tipo_Parte;
+    private String tipoParte;
 
-    @ManyToMany(mappedBy = "partes")
-    private List<Processo> processos = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "parte")
-    private List<Endereco_Parte> endereco_Parte = new ArrayList<>();
+    private List<EnderecoParte> enderecoParte = new ArrayList<>();
 
     public Parte() {}
 
-    public Parte(Long id, String nome, Date data_Nascimento, String cpf, String tipo_Parte) {
+    public Parte(Long id, String nome, Date dataNascimento, String cpf, String tipoParte) {
         this.id = id;
         this.nome = nome;
-        this.data_Nascimento = data_Nascimento;
+        this.dataNascimento = dataNascimento;
         this.cpf = cpf;
-        this.tipo_Parte = tipo_Parte;
+        this.tipoParte = tipoParte;
     }
 
     public Long getId() {
@@ -57,12 +57,12 @@ public class Parte implements Serializable {
         this.nome = nome;
     }
 
-    public Date getData_Nascimento() {
-        return data_Nascimento;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setData_Nascimento(Date data_Nascimento) {
-        this.data_Nascimento = data_Nascimento;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getCpf() {
@@ -73,45 +73,58 @@ public class Parte implements Serializable {
         this.cpf = cpf;
     }
 
-    public String getTipo_Parte() {
-        return tipo_Parte;
+    public String getTipoParte() {
+        return tipoParte;
     }
 
-    public void setTipo_Parte(String tipo_Parte) {
-        this.tipo_Parte = tipo_Parte;
+    public void setTipoParte(String tipoParte) {
+        this.tipoParte = tipoParte;
     }
 
-    public List<Processo> getProcessoPartes() {
-        return processos;
-    }
-
-    public List<Endereco_Parte> getEndereco_partes() {
-        return endereco_Parte;
+    public List<EnderecoParte> getenderecoPartes() {
+        return enderecoParte;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Parte)) return false;
-        Parte parte = (Parte) o;
-        return getId().equals(parte.getId());
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Parte other = (Parte) obj;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Parte{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", data_Nascimento=" + data_Nascimento +
+                ", dataNascimento=" + dataNascimento +
                 ", cpf='" + cpf + '\'' +
-                ", tipo_Parte='" + tipo_Parte + '\'' +
-                ", processo=" + processos +
-                ", endereco_Parte=" + endereco_Parte +
+                ", tipoParte='" + tipoParte + '\'' +
+                ", enderecoParte=" + enderecoParte +
                 '}';
     }
 }

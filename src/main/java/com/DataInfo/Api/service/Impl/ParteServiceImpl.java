@@ -15,7 +15,10 @@ public class ParteServiceImpl implements ParteService<Parte, Long>{
 	
 	@Autowired
 	ParteRepository parteRepository;
-
+	
+	@Autowired
+	EnderecoParteServiceImpl enderecoParteServiceImpl;
+	
 	@Override
 	public Parte save(Parte obj) {
 		return parteRepository.save(obj);

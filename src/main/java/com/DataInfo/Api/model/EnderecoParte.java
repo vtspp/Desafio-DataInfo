@@ -9,9 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Endereco_Parte implements Serializable {
+@Table(name = "tb_endereco_parte")
+public class EnderecoParte implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -28,9 +30,9 @@ public class Endereco_Parte implements Serializable {
     @JoinColumn(name = "id_parte")
     private Parte parte;
 
-    public Endereco_Parte() {}
+    public EnderecoParte() {}
 
-    public Endereco_Parte(Long id, String bairro, String cidade,
+    public EnderecoParte(Long id, String bairro, String cidade,
                           String estado, String cep, String logadouro,
                           Integer numero, Parte parte) {
         this.id = id;
@@ -110,8 +112,8 @@ public class Endereco_Parte implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Endereco_Parte)) return false;
-        Endereco_Parte that = (Endereco_Parte) o;
+        if (!(o instanceof EnderecoParte)) return false;
+        EnderecoParte that = (EnderecoParte) o;
         return getId().equals(that.getId());
     }
 
@@ -130,7 +132,7 @@ public class Endereco_Parte implements Serializable {
                 ", cep='" + cep + '\'' +
                 ", logadouro='" + logadouro + '\'' +
                 ", numero=" + numero +
-                ", parte=" + parte +
+                ", parte="  + parte +
                 '}';
     }
 }

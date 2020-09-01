@@ -2,7 +2,8 @@ package com.DataInfo.Api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.DataInfo.Api.model.Endereco_Parte;
+import com.DataInfo.Api.model.EnderecoParte;
 
-public interface EnderecoParteRepository extends Repositories<Endereco_Parte, Long>, JpaRepository<Endereco_Parte, Long>{
+public interface EnderecoParteRepository extends Repositories<EnderecoParte, Long>, JpaRepository<EnderecoParte, Long>{
+
 }

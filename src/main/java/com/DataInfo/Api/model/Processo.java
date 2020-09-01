@@ -1,21 +1,21 @@
 package com.DataInfo.Api.model;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_processo")
 public class Processo implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -23,28 +23,25 @@ public class Processo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nr_Processo;
-    private Date data_Criacao;
-    private Date data_distribuicao;
+    private Instant data_Criacao;
+    private Instant data_distribuicao;
 
     @ManyToOne
     @JoinColumn(name = "id_classe")
     private Classe classe;
 
-    @ManyToMany
-    @JoinTable(name = "processo_parte", 
-               joinColumns = @JoinColumn(name = "id_processo"),
-               inverseJoinColumns = @JoinColumn(name = "id_parte"))
-    private List<Parte> partes = new ArrayList<>();
+    @OneToMany(mappedBy = "processo")
+    private List<ProcessoParte> processoPartes = new ArrayList<>();
 
     public Processo() {}
 
-    public Processo(Long id, String nr_Processo, Date data_Criacao,
-                    Date data_distribuicao, Classe classe) {
+    public Processo(Long id, String nr_Processo, Instant data_Criacao,
+                    Instant data_distribuicao/*, Classe classe*/) {
         this.id = id;
         this.nr_Processo = nr_Processo;
         this.data_Criacao = data_Criacao;
         this.data_distribuicao = data_distribuicao;
-        this.classe = classe;
+        /*this.classe = classe;*/
     }
 
     public Long getId() {
@@ -63,19 +60,19 @@ public class Processo implements Serializable {
         this.nr_Processo = nr_Processo;
     }
 
-    public Date getData_Criacao() {
+    public Instant getData_Criacao() {
         return data_Criacao;
     }
 
-    public void setData_Criacao(Date data_Criacao) {
+    public void setData_Criacao(Instant data_Criacao) {
         this.data_Criacao = data_Criacao;
     }
 
-    public Date getData_distribuicao() {
+    public Instant getData_distribuicao() {
         return data_distribuicao;
     }
 
-    public void setData_distribuicao(Date data_distribuicao) {
+    public void setData_distribuicao(Instant data_distribuicao) {
         this.data_distribuicao = data_distribuicao;
     }
 
@@ -87,22 +84,40 @@ public class Processo implements Serializable {
         this.classe = classe;
     }
 
-    public List<Parte> getPartes() {
-        return partes;
+    public List<ProcessoParte> getPartes() {
+        return processoPartes;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Processo)) return false;
-        Processo processo = (Processo) o;
-        return getId().equals(processo.getId());
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nr_Processo == null) ? 0 : nr_Processo.hashCode());
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Processo other = (Processo) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nr_Processo == null) {
+			if (other.nr_Processo != null)
+				return false;
+		} else if (!nr_Processo.equals(other.nr_Processo))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
@@ -110,8 +125,8 @@ public class Processo implements Serializable {
 				+ "nr_Processo=" + nr_Processo + ", "
 				+ "data_Criacao=" + data_Criacao
 				+ ", data_distribuicao=" + data_distribuicao + ", "
-				+ "classe=" + classe + ", partes="
-				+ partes + "]";
+				+ "classe=" + classe + ", processoPartes="
+				+ processoPartes + "]";
 	}
 
     

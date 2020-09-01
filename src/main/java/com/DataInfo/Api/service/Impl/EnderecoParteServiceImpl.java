@@ -6,28 +6,39 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.DataInfo.Api.model.Endereco_Parte;
+import com.DataInfo.Api.model.EnderecoParte;
+import com.DataInfo.Api.model.Parte;
 import com.DataInfo.Api.repository.EnderecoParteRepository;
 import com.DataInfo.Api.service.EnderecoParteService;
 
 @Service
-public class EnderecoParteServiceImpl implements EnderecoParteService<Endereco_Parte, Long>{
+public class EnderecoParteServiceImpl implements EnderecoParteService<EnderecoParte, Long>{
 	
 	@Autowired
-	EnderecoParteRepository enderecoParteRepository;
+	private EnderecoParteRepository enderecoParteRepository;
+	
+	@Autowired
+	private ParteServiceImpl parteServiceImpl;
 
 	@Override
-	public Endereco_Parte save(Endereco_Parte obj) {
+	public EnderecoParte save(EnderecoParte obj) {
+		
+		Parte parte = new Parte(null, obj.getParte().getNome(),
+				                      obj.getParte().getDataNascimento(),
+				                      obj.getParte().getCpf(), 
+				                      obj.getParte().getTipoParte());
+
+		obj.setParte(parteServiceImpl.save(parte));
 		return enderecoParteRepository.save(obj);
 	}
 
 	@Override
-	public List<Endereco_Parte> findAll() {
+	public List<EnderecoParte> findAll() {
 		return enderecoParteRepository.findAll();
 	}
 
 	@Override
-	public Optional<Endereco_Parte> findById(Long id) {
+	public Optional<EnderecoParte> findById(Long id) {
 		return enderecoParteRepository.findById(id);
 	}
 

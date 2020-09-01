@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.DataInfo.Api.model.EnderecoParte;
-import com.DataInfo.Api.service.Impl.EnderecoParteServiceImpl;
+import com.DataInfo.Api.model.ProcessoJuiz;
+import com.DataInfo.Api.service.Impl.ProcessoJuizServiceImpl;
 
 @RestController
-@RequestMapping("/enderecos")
-public class EnderecoParteController {
+@RequestMapping("/processos_juizes")
+public class ProcessoJuizController {
 
 	@Autowired
-	private EnderecoParteServiceImpl enderecoParteService;
+	private ProcessoJuizServiceImpl processoJuizService;
 
 
 	    @PostMapping
-	    public ResponseEntity<EnderecoParte> save(@RequestBody EnderecoParte endereco) {
-	        return new ResponseEntity<>(enderecoParteService.save(endereco), HttpStatus.CREATED);
+	    public ResponseEntity<ProcessoJuiz> save(@RequestBody ProcessoJuiz processo) {
+	        return new ResponseEntity<>(processoJuizService.save(processo), HttpStatus.CREATED);
 	    }
 
 	    @GetMapping
-	    public ResponseEntity<List<EnderecoParte>> findAll() {
-	    	return new ResponseEntity<>(enderecoParteService.findAll(), HttpStatus.OK);
+	    public ResponseEntity<List<ProcessoJuiz>> findAll() {
+	    	return new ResponseEntity<>(processoJuizService.findAll(), HttpStatus.OK);
 	    }
 	    
 	    @GetMapping(path = "/{id}")
-	    public ResponseEntity<Optional<EnderecoParte>> findById(@PathVariable Long id) {
-	    	return new ResponseEntity<>(enderecoParteService.findById(id), HttpStatus.FOUND);
+	    public ResponseEntity<Optional<ProcessoJuiz>> findById(@PathVariable Long id) {
+	    	return new ResponseEntity<>(processoJuizService.findById(id), HttpStatus.FOUND);
 	    }
 
 
