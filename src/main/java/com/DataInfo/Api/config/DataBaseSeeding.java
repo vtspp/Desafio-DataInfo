@@ -59,12 +59,19 @@ try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			
 			Parte parte = new Parte(null, "teste", sdf.parse("14/06/1989"), "12312312303", "Desenvolvedor Java");
+			
+			Parte parte2 = new Parte(null, "teste", sdf.parse("14/06/1989"), "12312312303", "Desenvolvedor Java");
 			parteServiceImpl.save(parte);
+			parteServiceImpl.save(parte2);
 			
 			EnderecoParte endereco = new EnderecoParte(null, "São Gonçalo", "Rio de Janeiro", 
 					                                         "RJ", "24800000", "Rua Conde de Bonfim", 120, parte);
 			
+			EnderecoParte endereco2 = new EnderecoParte(null, "São Gonçalo", "Rio de Janeiro", 
+                    "RJ", "24800000", "Rua Conde de Bonfim", 120, parte2);
+			
 		    enderecoParteImpl.save(endereco);
+		    enderecoParteImpl.save(endereco2);
 		    
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

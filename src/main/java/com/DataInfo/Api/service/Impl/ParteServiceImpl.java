@@ -43,7 +43,7 @@ public class ParteServiceImpl implements ParteService<Parte, Long>{
 	}
 	
 	public void verifyUserAlreadyRegisteredByCpf(Parte obj) {
-		if (!parteRepository.existsByCpf(obj.getCpf())) {
+		if (parteRepository.existsByCpf(obj.getCpf())) {
 			throw new ErrorAlreadyRegistered("Cpf " + obj.getCpf() + " já cadastrado na base de dados");
 		}
 	}

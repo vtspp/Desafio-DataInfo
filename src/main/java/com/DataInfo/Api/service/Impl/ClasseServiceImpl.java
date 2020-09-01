@@ -20,7 +20,7 @@ public class ClasseServiceImpl implements ClasseService<Classe, Long>{
 
 	@Override
 	public Classe save(Classe obj) {
-		verifyUserAlreadyRegisteredByClasse(obj);
+		verifyAlreadyRegisteredByClasse(obj);
 		return classeRepository.save(obj);
 	}
 
@@ -41,8 +41,9 @@ public class ClasseServiceImpl implements ClasseService<Classe, Long>{
 		}
 	}
 	
-	public void verifyUserAlreadyRegisteredByClasse(Classe obj) {
-		if (!classeRepository.existsByClasse(obj)) {
+	public void verifyAlreadyRegisteredByClasse(Classe obj) {
+		
+		if (classeRepository.findAll().equals(obj) == true) {
 			throw new ErrorAlreadyRegistered("Classe " + obj.getClass().getName() 
 					                                   + " já cadastrado na base de dados");
 		}

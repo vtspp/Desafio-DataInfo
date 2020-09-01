@@ -43,7 +43,7 @@ public class JuizServiceImpl implements JuizService<Juiz, Long> {
 	}
 	
 	public void verifyUserAlreadyRegisteredByCpf(Juiz obj) {
-		if (!juizRepository.existsByCpf(obj.getCpf())) {
+		if (juizRepository.existsByCpf(obj.getCpf())) {
 			throw new ErrorAlreadyRegistered("Cpf " + obj.getCpf() + " já cadastrado na base de dados");
 		}
 	}
