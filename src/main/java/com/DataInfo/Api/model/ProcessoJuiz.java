@@ -62,6 +62,8 @@ public class ProcessoJuiz implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((juiz == null) ? 0 : juiz.hashCode());
+		result = prime * result + ((processo == null) ? 0 : processo.hashCode());
 		return result;
 	}
 
@@ -78,6 +80,16 @@ public class ProcessoJuiz implements Serializable {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (juiz == null) {
+			if (other.juiz != null)
+				return false;
+		} else if (!juiz.equals(other.juiz))
+			return false;
+		if (processo == null) {
+			if (other.processo != null)
+				return false;
+		} else if (!processo.equals(other.processo))
 			return false;
 		return true;
 	}

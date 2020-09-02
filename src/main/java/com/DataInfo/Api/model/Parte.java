@@ -17,80 +17,85 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tb_parte")
 public class Parte implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String nome;
-    private Date dataNascimento;
-    private String cpf;
-    private String tipoParte;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private String nome;
+	private Date dataNascimento;
+	private String cpf;
+	private String tipoParte;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "parte")
-    private List<EnderecoParte> enderecoParte = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "parte")
+	private List<EnderecoParte> enderecoParte = new ArrayList<>();
 
-    public Parte() {}
+	public Parte() {
+	}
 
-    public Parte(Long id, String nome, Date dataNascimento, String cpf, String tipoParte) {
-        this.id = id;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.cpf = cpf;
-        this.tipoParte = tipoParte;
-    }
+	public Parte(Long id, String nome, Date dataNascimento, String cpf, String tipoParte) {
+		this.id = id;
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.cpf = cpf;
+		this.tipoParte = tipoParte;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public String getTipoParte() {
-        return tipoParte;
-    }
+	public String getTipoParte() {
+		return tipoParte;
+	}
 
-    public void setTipoParte(String tipoParte) {
-        this.tipoParte = tipoParte;
-    }
+	public void setTipoParte(String tipoParte) {
+		this.tipoParte = tipoParte;
+	}
 
-    public List<EnderecoParte> getenderecoPartes() {
-        return enderecoParte;
-    }
+	public List<EnderecoParte> getenderecoPartes() {
+		return enderecoParte;
+	}
 
-    @Override
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result + ((enderecoParte == null) ? 0 : enderecoParte.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((tipoParte == null) ? 0 : tipoParte.hashCode());
 		return result;
 	}
 
@@ -108,23 +113,38 @@ public class Parte implements Serializable {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
+		if (dataNascimento == null) {
+			if (other.dataNascimento != null)
+				return false;
+		} else if (!dataNascimento.equals(other.dataNascimento))
+			return false;
+		if (enderecoParte == null) {
+			if (other.enderecoParte != null)
+				return false;
+		} else if (!enderecoParte.equals(other.enderecoParte))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (tipoParte == null) {
+			if (other.tipoParte != null)
+				return false;
+		} else if (!tipoParte.equals(other.tipoParte))
+			return false;
 		return true;
 	}
 
 	@Override
-    public String toString() {
-        return "Parte{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", cpf='" + cpf + '\'' +
-                ", tipoParte='" + tipoParte + '\'' +
-                ", enderecoParte=" + enderecoParte +
-                '}';
-    }
+	public String toString() {
+		return "Parte [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", cpf=" + cpf
+				+ ", tipoParte=" + tipoParte + ", enderecoParte=" + enderecoParte + "]";
+	}
+
 }

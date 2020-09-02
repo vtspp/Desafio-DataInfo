@@ -77,9 +77,7 @@ public class Classe implements Serializable {
 
     public List<Processo> getProcessos() {
         return processos;
-    }
-
-   
+    } 
 
     @Override
 	public int hashCode() {

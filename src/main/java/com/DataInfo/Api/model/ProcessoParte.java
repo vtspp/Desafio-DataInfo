@@ -62,6 +62,8 @@ public class ProcessoParte implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((parte == null) ? 0 : parte.hashCode());
+		result = prime * result + ((processo == null) ? 0 : processo.hashCode());
 		return result;
 	}
 
@@ -78,6 +80,16 @@ public class ProcessoParte implements Serializable {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (parte == null) {
+			if (other.parte != null)
+				return false;
+		} else if (!parte.equals(other.parte))
+			return false;
+		if (processo == null) {
+			if (other.processo != null)
+				return false;
+		} else if (!processo.equals(other.processo))
 			return false;
 		return true;
 	}

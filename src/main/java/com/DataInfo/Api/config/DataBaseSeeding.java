@@ -13,9 +13,11 @@ import org.springframework.context.annotation.Configuration;
 import com.DataInfo.Api.model.Classe;
 import com.DataInfo.Api.model.EnderecoParte;
 import com.DataInfo.Api.model.Parte;
+import com.DataInfo.Api.model.Processo;
 import com.DataInfo.Api.service.Impl.ClasseServiceImpl;
 import com.DataInfo.Api.service.Impl.EnderecoParteServiceImpl;
 import com.DataInfo.Api.service.Impl.ParteServiceImpl;
+import com.DataInfo.Api.service.Impl.ProcessoServiceImpl;
 
 @Configuration
 public class DataBaseSeeding implements CommandLineRunner {
@@ -28,6 +30,9 @@ public class DataBaseSeeding implements CommandLineRunner {
 	
 	@Autowired
 	private EnderecoParteServiceImpl enderecoParteImpl;
+	
+	@Autowired
+	private ProcessoServiceImpl processoServiceImpl;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -56,6 +61,8 @@ try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
 			
 			System.out.println("Application initialized with:" + path);
 			
+			
+			// Testes de composição entre objetos
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			
 			Parte parte = new Parte(null, "teste", sdf.parse("14/06/1989"), "12312312303", "Desenvolvedor Java");
@@ -72,6 +79,13 @@ try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
 			
 		    enderecoParteImpl.save(endereco);
 		    enderecoParteImpl.save(endereco2);
+		    
+		    // Obrigatorio a inclusão de uma claasse ao instanciar um processo
+		    Classe classe = new Classe(500L, "", "", "", ""); 
+		    classeService.save(classe);
+		    Processo processo = new Processo(null, null, null, null, classe);
+		    processoServiceImpl.save(processo);
+		    System.out.println(processo);
 		    
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

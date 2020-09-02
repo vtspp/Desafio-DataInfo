@@ -1,13 +1,18 @@
 package com.DataInfo.Api.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_juiz")
@@ -20,12 +25,10 @@ public class Juiz implements Serializable {
     private String nome;
     private String cpf;
     private Date data_Nascimento;
-/*
-    @ManyToMany
-    @JoinTable(name = "processo_juiz", 
-    joinColumns = @JoinColumn(name = "id_processo"),
-    inverseJoinColumns = @JoinColumn(name = "id_juiz"))
-    private List<Processo> processos = new ArrayList<>();*/
+
+    @JsonIgnore
+    @OneToMany
+    private List<Processo> processos = new ArrayList<>();
 
     public Juiz(){}
 
@@ -68,16 +71,19 @@ public class Juiz implements Serializable {
         this.data_Nascimento = data_Nascimento;
     }
 
-    /*public List<Processo> getProcesso() {
+    public List<Processo> getProcesso() {
         return processos;
-    }*/
+    }
 
-    @Override
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((data_Nascimento == null) ? 0 : data_Nascimento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((processos == null) ? 0 : processos.hashCode());
 		return result;
 	}
 
@@ -95,22 +101,33 @@ public class Juiz implements Serializable {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
+		if (data_Nascimento == null) {
+			if (other.data_Nascimento != null)
+				return false;
+		} else if (!data_Nascimento.equals(other.data_Nascimento))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (processos == null) {
+			if (other.processos != null)
+				return false;
+		} else if (!processos.equals(other.processos))
+			return false;
 		return true;
 	}
 
 	@Override
-    public String toString() {
-        return "Juiz{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", data_Nascimento=" + data_Nascimento +
-                ", processos=" /*+ processos*/ +
-                '}';
-    }
+	public String toString() {
+		return "Juiz [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", data_Nascimento=" + data_Nascimento
+				+ ", processos=" + processos + "]";
+	}
+
 }

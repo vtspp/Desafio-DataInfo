@@ -1,8 +1,8 @@
 package com.DataInfo.Api.model;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_processo")
 public class Processo implements Serializable {
@@ -23,25 +25,26 @@ public class Processo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nr_Processo;
-    private Instant data_Criacao;
-    private Instant data_distribuicao;
+    private Date data_Criacao;
+    private Date data_distribuicao;
 
     @ManyToOne
     @JoinColumn(name = "id_classe")
     private Classe classe;
 
     @OneToMany(mappedBy = "processo")
+    @JsonIgnore
     private List<ProcessoParte> processoPartes = new ArrayList<>();
 
     public Processo() {}
 
-    public Processo(Long id, String nr_Processo, Instant data_Criacao,
-                    Instant data_distribuicao/*, Classe classe*/) {
+    public Processo(Long id, String nr_Processo, Date data_Criacao,
+    		Date data_distribuicao, Classe classe) {
         this.id = id;
         this.nr_Processo = nr_Processo;
         this.data_Criacao = data_Criacao;
         this.data_distribuicao = data_distribuicao;
-        /*this.classe = classe;*/
+        this.classe = classe;
     }
 
     public Long getId() {
@@ -60,19 +63,19 @@ public class Processo implements Serializable {
         this.nr_Processo = nr_Processo;
     }
 
-    public Instant getData_Criacao() {
+    public Date getData_Criacao() {
         return data_Criacao;
     }
 
-    public void setData_Criacao(Instant data_Criacao) {
+    public void setData_Criacao(Date data_Criacao) {
         this.data_Criacao = data_Criacao;
     }
 
-    public Instant getData_distribuicao() {
+    public Date getData_distribuicao() {
         return data_distribuicao;
     }
 
-    public void setData_distribuicao(Instant data_distribuicao) {
+    public void setData_distribuicao(Date data_distribuicao) {
         this.data_distribuicao = data_distribuicao;
     }
 
@@ -92,8 +95,12 @@ public class Processo implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((classe == null) ? 0 : classe.hashCode());
+		result = prime * result + ((data_Criacao == null) ? 0 : data_Criacao.hashCode());
+		result = prime * result + ((data_distribuicao == null) ? 0 : data_distribuicao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nr_Processo == null) ? 0 : nr_Processo.hashCode());
+		result = prime * result + ((processoPartes == null) ? 0 : processoPartes.hashCode());
 		return result;
 	}
 
@@ -106,6 +113,21 @@ public class Processo implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Processo other = (Processo) obj;
+		if (classe == null) {
+			if (other.classe != null)
+				return false;
+		} else if (!classe.equals(other.classe))
+			return false;
+		if (data_Criacao == null) {
+			if (other.data_Criacao != null)
+				return false;
+		} else if (!data_Criacao.equals(other.data_Criacao))
+			return false;
+		if (data_distribuicao == null) {
+			if (other.data_distribuicao != null)
+				return false;
+		} else if (!data_distribuicao.equals(other.data_distribuicao))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -116,16 +138,18 @@ public class Processo implements Serializable {
 				return false;
 		} else if (!nr_Processo.equals(other.nr_Processo))
 			return false;
+		if (processoPartes == null) {
+			if (other.processoPartes != null)
+				return false;
+		} else if (!processoPartes.equals(other.processoPartes))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Processo [id=" + id + ", "
-				+ "nr_Processo=" + nr_Processo + ", "
-				+ "data_Criacao=" + data_Criacao
-				+ ", data_distribuicao=" + data_distribuicao + ", "
-				+ "classe=" + classe + ", processoPartes="
+		return "Processo [id=" + id + ", nr_Processo=" + nr_Processo + ", data_Criacao=" + data_Criacao
+				+ ", data_distribuicao=" + data_distribuicao + ", classe=" + classe + ", processoPartes="
 				+ processoPartes + "]";
 	}
 
