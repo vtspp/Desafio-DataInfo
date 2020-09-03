@@ -1,5 +1,6 @@
 package com.DataInfo.Api.service.Impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -57,28 +58,37 @@ public class ProcessoServiceImpl implements ProcessoService<Processo, Long>{
 		String[] strId = processo.getId().toString().split("");
 		
 		/* Verifica qual o tamanho do valor da variável */
-		int strTam = strId.length + 1;
+		int strTam = strId.length;
 		
 		/* Tamanho padrão */
-		String[] stdFormat = {"0","0","0","0","0","0","0"};
+		String stdFormat = "0000000";
+	
 		
 		/* Gera uma substring retirando a quantidade 
 		necessária para manter o tamanho padrão e um novo formato concatenando
 		  a substring com o valor do Id já convertido para string*/
-		String newStdFormat = stdFormat.toString().substring(0, strTam)+strId.toString();
+		String newStdFormat = stdFormat.substring(0, 7 - strTam)+processo.getId();
 		
 		
+		
+		System.out.println(newStdFormat);
 		StringBuilder sb = new StringBuilder();
 		
 		Calendar calendar = Calendar.getInstance();
-		calendar.get(calendar.MONTH);
+		int mes = calendar.get(calendar.MONTH) + 1;
+		
+		StringBuilder sbFormatMes = new StringBuilder();
+		
+		sbFormatMes = (mes < 10 ) ? sbFormatMes.append("0").append(mes) 
+				                  : sbFormatMes.append("");
 		
 		sb.append(newStdFormat)
 		  .append("-")
-		  .append(calendar.get(calendar.MONTH))
+		  .append(sbFormatMes)
+		  .append(".")
 		  .append(calendar.get(calendar.YEAR))
 		  .append(".")
-		  .append("JTR");
+		  .append("811");
 		
 		
 		return sb.toString();

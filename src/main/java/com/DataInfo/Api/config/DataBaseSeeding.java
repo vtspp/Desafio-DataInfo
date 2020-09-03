@@ -81,11 +81,11 @@ try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
 		    enderecoParteImpl.save(endereco2);
 		    
 		    // Obrigatorio a inclusão de uma claasse ao instanciar um processo
-		    Classe classe = new Classe(500L, "", "", "", ""); 
+		    Classe classe = new Classe(100L, "", "", "", ""); 
 		    classeService.save(classe);
 		    Processo processo = new Processo(null, null, null, null, classe);
 		    processoServiceImpl.save(processo);
-		    System.out.println(processo);
+		    System.out.println(processo.toString());
 		    
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
