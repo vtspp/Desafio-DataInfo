@@ -32,9 +32,9 @@ public class Processo implements Serializable {
     @JoinColumn(name = "id_classe")
     private Classe classe;
 
-    @OneToMany(mappedBy = "processo")
+    /*@OneToMany(mappedBy = "processo")
     @JsonIgnore
-    private List<ProcessoParte> processoPartes = new ArrayList<>();
+    private List<ProcessoParte> processoPartes = new ArrayList<>();*/
 
     public Processo() {}
 
@@ -87,9 +87,9 @@ public class Processo implements Serializable {
         this.classe = classe;
     }
 
-    public List<ProcessoParte> getPartes() {
+    /*public List<ProcessoParte> getPartes() {
         return processoPartes;
-    }
+    }*/
 
 	@Override
 	public int hashCode() {
@@ -100,7 +100,7 @@ public class Processo implements Serializable {
 		result = prime * result + ((data_distribuicao == null) ? 0 : data_distribuicao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nr_Processo == null) ? 0 : nr_Processo.hashCode());
-		result = prime * result + ((processoPartes == null) ? 0 : processoPartes.hashCode());
+		/*result = prime * result + ((processoPartes == null) ? 0 : processoPartes.hashCode());*/
 		return result;
 	}
 
@@ -138,11 +138,11 @@ public class Processo implements Serializable {
 				return false;
 		} else if (!nr_Processo.equals(other.nr_Processo))
 			return false;
-		if (processoPartes == null) {
+		/*if (processoPartes == null) {
 			if (other.processoPartes != null)
 				return false;
 		} else if (!processoPartes.equals(other.processoPartes))
-			return false;
+			return false;*/
 		return true;
 	}
 
@@ -150,7 +150,7 @@ public class Processo implements Serializable {
 	public String toString() {
 		return "Processo [id=" + id + ", nr_Processo=" + nr_Processo + ", data_Criacao=" + data_Criacao
 				+ ", data_distribuicao=" + data_distribuicao + ", classe=" + classe + ", processoPartes="
-				+ processoPartes + "]";
+				+ /*processoPartes +*/ "]";
 	}
 
     

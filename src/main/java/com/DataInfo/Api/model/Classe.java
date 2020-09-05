@@ -21,8 +21,8 @@ public class Classe implements Serializable {
     private String sigla;
     private String tipo;
 
-    @OneToMany(mappedBy = "classe")
-    private List<Processo> processos = new ArrayList<>();
+    /*@OneToMany(mappedBy = "classe")
+    private List<Processo> processos = new ArrayList<>();*/
 
     public Classe() {}
 
@@ -75,9 +75,9 @@ public class Classe implements Serializable {
         this.tipo = tipo;
     }
 
-    public List<Processo> getProcessos() {
+   /* public List<Processo> getProcessos() {
         return processos;
-    } 
+    } */
 
     @Override
 	public int hashCode() {
@@ -86,7 +86,7 @@ public class Classe implements Serializable {
 		result = prime * result + ((ds_Classe == null) ? 0 : ds_Classe.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((id_Cnj == null) ? 0 : id_Cnj.hashCode());
-		result = prime * result + ((processos == null) ? 0 : processos.hashCode());
+		/*result = prime * result + ((processos == null) ? 0 : processos.hashCode());*/
 		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
@@ -116,11 +116,11 @@ public class Classe implements Serializable {
 				return false;
 		} else if (!id_Cnj.equals(other.id_Cnj))
 			return false;
-		if (processos == null) {
+		/*if (processos == null) {
 			if (other.processos != null)
 				return false;
 		} else if (!processos.equals(other.processos))
-			return false;
+			return false;*/
 		if (sigla == null) {
 			if (other.sigla != null)
 				return false;
@@ -142,7 +142,7 @@ public class Classe implements Serializable {
                 ", ds_Classe='" + ds_Classe + '\'' +
                 ", sigla='" + sigla + '\'' +
                 ", tipo='" + tipo + '\'' +
-                ", processos=" + processos +
+                ", processos=" + /*processos +*/
                 '}';
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.DataInfo.Api.model.Classe;
-import com.DataInfo.Api.model.EnderecoParte;
+import com.DataInfo.Api.model.Endereco;
 import com.DataInfo.Api.model.Parte;
 import com.DataInfo.Api.model.Processo;
 import com.DataInfo.Api.service.Impl.ClasseServiceImpl;
@@ -60,7 +60,7 @@ try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
 			}
 			
 			System.out.println("Application initialized with:" + path);
-			
+			/*
 			
 			// Testes de composição entre objetos
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -79,13 +79,13 @@ try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
 			
 		    enderecoParteImpl.save(endereco);
 		    enderecoParteImpl.save(endereco2);
-		    
-		    // Obrigatorio a inclusão de uma claasse ao instanciar um processo
+		    */
+		    /*// Obrigatorio a inclusão de uma classe ao instanciar um processo
 		    Classe classe = new Classe(100L, "", "", "", ""); 
 		    classeService.save(classe);
 		    Processo processo = new Processo(null, null, null, null, classe);
 		    processoServiceImpl.save(processo);
-		    System.out.println(processo.toString());
+		    System.out.println(processo.toString());*/
 		    
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

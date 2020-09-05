@@ -69,9 +69,7 @@ public class ProcessoServiceImpl implements ProcessoService<Processo, Long>{
 		  a substring com o valor do Id já convertido para string*/
 		String newStdFormat = stdFormat.substring(0, 7 - strTam)+processo.getId();
 		
-		
-		
-		System.out.println(newStdFormat);
+		/* Montando o número do processo */
 		StringBuilder sb = new StringBuilder();
 		
 		Calendar calendar = Calendar.getInstance();

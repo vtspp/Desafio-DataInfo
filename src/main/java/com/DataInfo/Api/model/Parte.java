@@ -29,7 +29,7 @@ public class Parte implements Serializable {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "parte")
-	private List<EnderecoParte> enderecoParte = new ArrayList<>();
+	private List<Endereco> endereco = new ArrayList<>();
 
 	public Parte() {
 	}
@@ -82,8 +82,8 @@ public class Parte implements Serializable {
 		this.tipoParte = tipoParte;
 	}
 
-	public List<EnderecoParte> getenderecoPartes() {
-		return enderecoParte;
+	public List<Endereco> getEndereco() {
+		return endereco;
 	}
 
 	@Override
@@ -91,11 +91,7 @@ public class Parte implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
-		result = prime * result + ((enderecoParte == null) ? 0 : enderecoParte.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((tipoParte == null) ? 0 : tipoParte.hashCode());
 		return result;
 	}
 
@@ -113,30 +109,10 @@ public class Parte implements Serializable {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
-		if (dataNascimento == null) {
-			if (other.dataNascimento != null)
-				return false;
-		} else if (!dataNascimento.equals(other.dataNascimento))
-			return false;
-		if (enderecoParte == null) {
-			if (other.enderecoParte != null)
-				return false;
-		} else if (!enderecoParte.equals(other.enderecoParte))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (tipoParte == null) {
-			if (other.tipoParte != null)
-				return false;
-		} else if (!tipoParte.equals(other.tipoParte))
 			return false;
 		return true;
 	}
@@ -144,7 +120,7 @@ public class Parte implements Serializable {
 	@Override
 	public String toString() {
 		return "Parte [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", cpf=" + cpf
-				+ ", tipoParte=" + tipoParte + ", enderecoParte=" + enderecoParte + "]";
+				+ ", tipoParte=" + tipoParte + ", endereco=" + endereco + "]";
 	}
 
 }

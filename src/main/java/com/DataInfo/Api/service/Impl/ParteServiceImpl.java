@@ -6,9 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.DataInfo.Api.error.ErrorNotFound;
 import com.DataInfo.Api.error.ErrorAlreadyRegistered;
+import com.DataInfo.Api.error.ErrorNotFound;
 import com.DataInfo.Api.model.Parte;
+import com.DataInfo.Api.repository.EnderecoParteRepository;
 import com.DataInfo.Api.repository.ParteRepository;
 import com.DataInfo.Api.service.ParteService;
 
@@ -18,10 +19,18 @@ public class ParteServiceImpl implements ParteService<Parte, Long>{
 	@Autowired
 	ParteRepository parteRepository;
 	
+	@Autowired
+	EnderecoParteRepository enderecoRepository;
+	
 	@Override
 	public Parte save(Parte obj) {
 		verifyUserAlreadyRegisteredByCpf(obj);
-		return parteRepository.save(obj);
+		
+		//Salva o endereço associando a o obj Parte
+		//Endereco endereco = obj.getEndereco();
+		//enderecoRepository.save(obj.getEndereco());
+		parteRepository.save(obj);
+		return obj;
 	}
 
 	@Override
